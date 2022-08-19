@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap');
+
 :root {
   --background: hsl(222, 26%, 31%);
   --background-secondary: hsl(223, 31%, 20%);
@@ -36,4 +38,9 @@
   --key-shadow-equals: hsl(177, 92%, 70%);
   --text-primary: hsl(52, 100%, 62%);
   --text-secondary: hsl(198, 20%, 13%);
+}
+
+body {
+  font-size: 32px;
+  font-family: 'League Spartan', sans-serif;
 }
