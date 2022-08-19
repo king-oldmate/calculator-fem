@@ -1,0 +1,6 @@
+.buttonbox {
+  width: 100%;
+  background-color: var(--background-secondary);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}

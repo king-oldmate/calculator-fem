@@ -1,0 +1,5 @@
+.screen {
+    background-color: var(--screen-background);
+    color: var(--screen-text);
+    width: 100%;
+}

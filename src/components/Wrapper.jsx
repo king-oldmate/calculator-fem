@@ -1,8 +1,9 @@
 import React from 'react'
+import './Wrapper.css'
 
-const Wrapper = () => {
+const Wrapper = ({children}) => {
   return (
-    <div>Wrapper</div>
+    <div className='wrapper'>{children}</div>
   )
 }
 
