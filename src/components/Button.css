@@ -1,7 +1,35 @@
-.reset {
-  grid-column: 1 / span 2;
+.buttonbox button {
+  height: 60px;
+  font-size: 0.625em;
+  font-weight: 700;
+  font-family: "League Spartan", sans-serif;
+  color: var(--text-buttons);
+  background-color: var(--key-background);
+  border: 0;
+  border-radius: 6px;
+  box-shadow: 0 4px var(--key-shadow);
 }
 
-.equals {
+.buttonbox button:active {
+  filter: brightness(1.75);
+}
+
+.buttonbox .del {
+  background-color: var(--key-background-secondary);
+  box-shadow: 0 4px var(--key-shadow-secondary);
+  color: var(--text-del-reset);
+}
+
+.buttonbox .reset {
+  grid-column: 1 / span 2;
+  background-color: var(--key-background-secondary);
+  box-shadow: 0 4px var(--key-shadow-secondary);
+  color: var(--text-del-reset);
+}
+
+.buttonbox .equals {
   grid-column: 3 / span 2;
+  background-color: var(--key-background-equals);
+  box-shadow: 0 4px var(--key-shadow-equals);
+  color: var(--text-equals);
 }

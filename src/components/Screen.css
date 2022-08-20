@@ -1,5 +1,6 @@
 .screen {
-    background-color: var(--screen-background);
-    color: var(--screen-text);
-    width: 100%;
+  background-color: var(--screen-background);
+  color: var(--screen-text);
+  width: 100%;
+  text-align: right;
 }

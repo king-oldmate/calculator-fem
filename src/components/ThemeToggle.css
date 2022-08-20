@@ -1,0 +1,42 @@
+.toggle-container {
+  display: flex;
+  align-items: flex-end;
+}
+
+.toggle-container div:first-of-type {
+  font-size: 12px;
+}
+
+ul {
+  font-size: 0.4em;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+  width: 70px;
+  padding: 4px;
+  border-radius: 999px;
+  gap: 10px;
+}
+
+.toggle-switch {
+  background-color: var(--background-secondary);
+}
+
+.toggle-switch li {
+  width: 16px;
+  height: 16px;
+  background-color: var(--key-background-equals);
+  border-radius: 999px;
+}
+
+.first {
+  grid-column-start: 1;
+}
+
+.second {
+  grid-column-start: 2;
+}
+
+.third {
+  grid-column-start: 3;
+}

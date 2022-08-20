@@ -11,7 +11,7 @@ const btnValues = [
   [7, 8, 9, "DEL"],
   [4, 5, 6, "+"],
   [1, 2, 3, "-"],
-  [".", 0, "×", "÷"],
+  [".", 0, "÷", "×"],
   ["RESET", "="],
 ];
 
@@ -23,15 +23,19 @@ function App() {
   );
 
   const switchTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
+    const newTheme =
+      theme === "light" ? "neon" : theme === "neon" ? "dark" : "light";
     setTheme(newTheme);
   };
 
   return (
     <div className="App" data-theme={theme}>
       <Wrapper>
-        calc
-        <ThemeToggle props={[theme, switchTheme]} />
+        <div className="top">
+          calc
+          <ThemeToggle props={[theme, setTheme, switchTheme]} />
+        </div>
+
         <Screen />
         <ButtonBox>
           {btnValues.flat().map((btn, i) => {
@@ -39,7 +43,13 @@ function App() {
               <Button
                 key={i}
                 className={
-                  btn === "RESET" ? "reset" : btn === "=" ? "equals" : ""
+                  btn === "RESET"
+                    ? "reset"
+                    : btn === "="
+                    ? "equals"
+                    : btn === "DEL"
+                    ? "del"
+                    : ""
                 }
                 value={btn}
                 onClick={() => {

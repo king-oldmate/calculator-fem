@@ -3,4 +3,6 @@
   background-color: var(--background-secondary);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  gap: 0.375em;
+  padding: 0.75em;
 }
