@@ -5,6 +5,8 @@
 
 .toggle-container div:first-of-type {
   font-size: 12px;
+  margin-right: 26px;
+  margin-bottom: 6px;
 }
 
 ul {
@@ -18,8 +20,13 @@ ul {
   gap: 10px;
 }
 
+ul:first-of-type li {
+  cursor: pointer;
+}
+
 .toggle-switch {
   background-color: var(--background-secondary);
+  cursor: pointer;
 }
 
 .toggle-switch li {

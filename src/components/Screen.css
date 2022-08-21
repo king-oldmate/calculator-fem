@@ -3,4 +3,7 @@
   color: var(--screen-text);
   width: 100%;
   text-align: right;
+  padding: 0.75em;
+  margin-bottom: 0.75em;
+  border-radius: 10px;
 }

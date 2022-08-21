@@ -1,10 +1,9 @@
-import React from 'react'
-import './Screen.css'
+import React from "react";
+import "./Screen.css";
 
-const Screen = () => {
-  return (
-    <div className='screen'>Screen</div>
-  )
-}
+const Screen = ({ props }) => {
+  const [screenDisplay] = props;
+  return <div className="screen">{screenDisplay}</div>;
+};
 
-export default Screen
+export default Screen;

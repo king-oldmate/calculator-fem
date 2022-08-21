@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, useState } from "react";
 import useLocalStorage from "use-local-storage";
 import "./App.css";
 import Wrapper from "./components/Wrapper";
@@ -28,6 +28,48 @@ function App() {
     setTheme(newTheme);
   };
 
+  const handleInput = (btn) => {
+    console.log(`${btn} clicked!`);
+    if (btn >= 0 && btn <= 9 && screenDisplay === "0") {
+      const updateScreen = btn.toString();
+      setScreenDisplay(updateScreen);
+    } else if (btn >= 0 && btn <= 9 && screenDisplay !== "0") {
+      const updateScreen = screenDisplay + btn;
+      setScreenDisplay(updateScreen);
+    } else if (btn === "." && screenDisplay.indexOf(".") === -1) {
+      const updateScreen = screenDisplay + btn;
+      setScreenDisplay(updateScreen);
+    } else if (btn === "+" || btn === "-" || btn === "×" || btn === "÷") {
+      if (!firstNumber) {
+        setFirstNumber(Number(screenDisplay));
+        setScreenDisplay("0");
+        setOperation(btn);
+      } else if (firstNumber) {
+        setSecondNumber(Number(screenDisplay));
+        calculateResult();
+      }
+    } else if (btn === "=" && firstNumber && secondNumber && operation) {
+      calculateResult();
+    }
+  };
+
+  const calculateResult = () => {
+    console.log(firstNumber, operation, secondNumber);
+    // switch (operation) {
+    //   case "+":
+    //     const result = firstNumber + secondNumber;
+    //     setScreenDisplay(result);
+    // }
+    // setFirstNumber(null);
+    // setSecondNumber(null);
+    // setOperation(null);
+  };
+
+  const [firstNumber, setFirstNumber] = useState(null);
+  const [operation, setOperation] = useState(null);
+  const [secondNumber, setSecondNumber] = useState(null);
+  const [screenDisplay, setScreenDisplay] = useState("0");
+
   return (
     <div className="App" data-theme={theme}>
       <Wrapper>
@@ -36,7 +78,7 @@ function App() {
           <ThemeToggle props={[theme, setTheme, switchTheme]} />
         </div>
 
-        <Screen />
+        <Screen props={[screenDisplay]} />
         <ButtonBox>
           {btnValues.flat().map((btn, i) => {
             return (
@@ -53,7 +95,7 @@ function App() {
                 }
                 value={btn}
                 onClick={() => {
-                  console.log(`${btn} clicked!`);
+                  handleInput(btn);
                 }}
               />
             );
