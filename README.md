@@ -32,8 +32,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Source code](https://github.com/king-oldmate/calculator-fem)
+- Live Site URL: [See it live](https://effulgent-snickerdoodle-a067c3.netlify.app/)
 
 ## My process
 

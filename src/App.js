@@ -1,4 +1,4 @@
-import React, { lazy, useState } from "react";
+import React, { useState } from "react";
 import useLocalStorage from "use-local-storage";
 import "./App.css";
 import Wrapper from "./components/Wrapper";
