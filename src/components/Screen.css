@@ -10,7 +10,8 @@
 
 @media screen and (min-width: 600px) {
   .screen {
-    font-size: 1.4em;
+    font-size: 1.76em;
+    padding: 0.53267em;
     margin-bottom: 0.6875em;
   }
 }

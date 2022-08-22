@@ -36,6 +36,10 @@ ul:first-of-type li {
   border-radius: 999px;
 }
 
+.toggle-switch li:active {
+  filter: brightness(1.5);
+}
+
 .first {
   grid-column-start: 1;
 }
