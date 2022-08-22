@@ -57,14 +57,14 @@ function App() {
     e.preventDefault();
     const btn = e.target.innerHTML;
     if (calc.sign === "") {
-      let value =
-        !calc.firstNum.toString().includes(btn) &&
-        calc.firstNum.toString() + btn;
+      let value = !calc.firstNum.toString().includes(btn)
+        ? calc.firstNum.toString() + btn
+        : calc.firstNum;
       setCalc({ ...calc, firstNum: value });
     } else {
-      let value =
-        !calc.secondNum.toString().includes(btn) &&
-        calc.secondNum.toString() + btn;
+      let value = !calc.secondNum.toString().includes(btn)
+        ? calc.secondNum.toString() + btn
+        : calc.secondNum;
       setCalc({ ...calc, secondNum: value });
     }
   };

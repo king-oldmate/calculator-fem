@@ -37,3 +37,17 @@
   color: var(--text-equals);
   font-size: 0.625em;
 }
+
+@media screen and (min-width: 600px) {
+  .buttonbox button {
+    height: 65px;
+    font-size: 1.2em;
+    border-radius: 12px;
+  }
+
+  .buttonbox .del,
+  .buttonbox .equals,
+  .buttonbox .reset {
+    font-size: 0.8em;
+  }
+}
