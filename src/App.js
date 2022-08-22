@@ -28,47 +28,132 @@ function App() {
     setTheme(newTheme);
   };
 
-  const handleInput = (btn) => {
-    console.log(`${btn} clicked!`);
-    if (btn >= 0 && btn <= 9 && screenDisplay === "0") {
-      const updateScreen = btn.toString();
-      setScreenDisplay(updateScreen);
-    } else if (btn >= 0 && btn <= 9 && screenDisplay !== "0") {
-      const updateScreen = screenDisplay + btn;
-      setScreenDisplay(updateScreen);
-    } else if (btn === "." && screenDisplay.indexOf(".") === -1) {
-      const updateScreen = screenDisplay + btn;
-      setScreenDisplay(updateScreen);
-    } else if (btn === "+" || btn === "-" || btn === "×" || btn === "÷") {
-      if (!firstNumber) {
-        setFirstNumber(Number(screenDisplay));
-        setScreenDisplay("0");
-        setOperation(btn);
-      } else if (firstNumber) {
-        setSecondNumber(Number(screenDisplay));
-        calculateResult();
-      }
-    } else if (btn === "=" && firstNumber && secondNumber && operation) {
-      calculateResult();
+  let [calc, setCalc] = useState({
+    sign: "",
+    firstNum: 0,
+    secondNum: 0,
+  });
+
+  const numClickHandler = (e) => {
+    e.preventDefault();
+    const btn = e.target.innerHTML;
+    if (calc.sign === "") {
+      let value =
+        calc.firstNum !== 0 && calc.firstNum !== "0"
+          ? calc.firstNum + btn
+          : btn;
+      setCalc({ ...calc, firstNum: value });
+    } else {
+      let value =
+        calc.secondNum !== 0 && calc.firstNum !== "0"
+          ? calc.secondNum + btn
+          : btn;
+
+      setCalc({ ...calc, secondNum: value });
     }
   };
 
-  const calculateResult = () => {
-    console.log(firstNumber, operation, secondNumber);
-    // switch (operation) {
-    //   case "+":
-    //     const result = firstNumber + secondNumber;
-    //     setScreenDisplay(result);
-    // }
-    // setFirstNumber(null);
-    // setSecondNumber(null);
-    // setOperation(null);
+  const dotClickHandler = (e) => {
+    e.preventDefault();
+    const btn = e.target.innerHTML;
+    if (calc.sign === "") {
+      let value =
+        !calc.firstNum.toString().includes(btn) &&
+        calc.firstNum.toString() + btn;
+      setCalc({ ...calc, firstNum: value });
+    } else {
+      let value =
+        !calc.secondNum.toString().includes(btn) &&
+        calc.secondNum.toString() + btn;
+      setCalc({ ...calc, secondNum: value });
+    }
   };
 
-  const [firstNumber, setFirstNumber] = useState(null);
-  const [operation, setOperation] = useState(null);
-  const [secondNumber, setSecondNumber] = useState(null);
-  const [screenDisplay, setScreenDisplay] = useState("0");
+  const signClickHandler = (e) => {
+    e.preventDefault();
+    const btn = e.target.innerHTML;
+    if (btn === "+") {
+      setCalc({
+        ...calc,
+        sign: "+",
+      });
+    } else if (btn === "-") {
+      setCalc({
+        ...calc,
+        sign: "-",
+      });
+    } else if (btn === "×") {
+      setCalc({
+        ...calc,
+        sign: "*",
+      });
+    } else {
+      setCalc({
+        ...calc,
+        sign: "/",
+      });
+    }
+  };
+
+  const equalsClickHandler = (e) => {
+    e.preventDefault();
+    const btn = e.target.innerHTML;
+    let result = 0;
+    if (calc.firstNum && calc.sign && calc.secondNum) {
+      switch (calc.sign) {
+        case "+":
+          result = Number(calc.firstNum) + Number(calc.secondNum);
+          break;
+        case "-":
+          result = Number(calc.firstNum) - Number(calc.secondNum);
+          break;
+        case "*":
+          result = Number(calc.firstNum) * Number(calc.secondNum);
+          break;
+        default:
+          result = Number(calc.firstNum) / Number(calc.secondNum);
+      }
+    }
+    setCalc({
+      firstNum: result.toString(),
+      secondNum: 0,
+      sign: btn === "=" ? "" : btn,
+    });
+  };
+
+  const deleteClickHandler = () => {
+    let value;
+    if (calc.sign === "") {
+      if (calc.firstNum.length > 1) {
+        value = calc.firstNum.toString().slice(0, calc.firstNum.length - 1);
+      } else {
+        value = 0;
+      }
+      setCalc({
+        ...calc,
+        firstNum: value,
+      });
+    } else {
+      if (calc.secondNum.length > 1) {
+        value = calc.secondNum.toString().slice(0, calc.secondNum.length - 1);
+      } else {
+        value = 0;
+      }
+      setCalc({
+        ...calc,
+        secondNum: value,
+      });
+    }
+  };
+
+  const resetClickHandler = () => {
+    setCalc({
+      ...calc,
+      sign: "",
+      firstNum: 0,
+      secondNum: 0,
+    });
+  };
 
   return (
     <div className="App" data-theme={theme}>
@@ -77,8 +162,7 @@ function App() {
           calc
           <ThemeToggle props={[theme, setTheme, switchTheme]} />
         </div>
-
-        <Screen props={[screenDisplay]} />
+        <Screen value={calc.secondNum ? calc.secondNum : calc.firstNum} />
         <ButtonBox>
           {btnValues.flat().map((btn, i) => {
             return (
@@ -94,9 +178,25 @@ function App() {
                     : ""
                 }
                 value={btn}
-                onClick={() => {
-                  handleInput(btn);
-                }}
+                onClick={
+                  btn === "RESET"
+                    ? resetClickHandler
+                    : btn === "="
+                    ? equalsClickHandler
+                    : (btn === "+" ||
+                        btn === "-" ||
+                        btn === "×" ||
+                        btn === "÷") &&
+                      calc.secondNum
+                    ? equalsClickHandler
+                    : btn === "+" || btn === "-" || btn === "×" || btn === "÷"
+                    ? signClickHandler
+                    : btn === "."
+                    ? dotClickHandler
+                    : btn === "DEL"
+                    ? deleteClickHandler
+                    : numClickHandler
+                }
               />
             );
           })}

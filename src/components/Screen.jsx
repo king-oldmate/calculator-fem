@@ -1,9 +1,8 @@
 import React from "react";
 import "./Screen.css";
 
-const Screen = ({ props }) => {
-  const [screenDisplay] = props;
-  return <div className="screen">{screenDisplay}</div>;
+const Screen = ({ value }) => {
+  return <div className="screen">{value}</div>;
 };
 
 export default Screen;
